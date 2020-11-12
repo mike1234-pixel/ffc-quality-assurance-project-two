@@ -1,7 +1,7 @@
 {
-	"name": "my-hyperdev-app",
+	"name": "stock-checker",
 	"version": "0.0.1",
-	"description": "What am I about?",
+	"description": "NASDAQ stock price checker",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
@@ -26,7 +26,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://hyperdev.com/#!/project/welcome-project"
+		"url": "https://github.com/mike1234-pixel/ffc-quality-assurance-project-two"
 	},
 	"keywords": [
 		"node",
