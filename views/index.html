@@ -7,7 +7,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./public/style.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- Local CSS -->
+    <link rel="stylesheet" href="/public/styles.css">
   </head>
   <body>
     <header>
@@ -17,36 +24,54 @@
     </header>
     <div id='userstories' style='margin-left: 5%; margin-top: 5%'>
       <a href="https://www.advfn.com/nasdaq/nasdaq.asp" target="_blank">List of NASDAQ companies and symbols.</a>
-      <p>DISPLAY A LIST OF COMPANIES AND SYMBOLS HERE</p>
       <h3>Example usage:</h3>
       <code>/api/stock-prices?stock=goog</code><br>
       <code>/api/stock-prices?stock=goog&amp;stock=msft</code><br>
     </div>
-    <hr style='margin: 50px'>
+    <hr style='margin: 20px'>
     <div id='testui' style='margin-left: 5%'>
-      <h2 style="text-align: left">Front-End:</h2>
+      <h2 >Front-End:</h2>
+      <span id="testFormResults"></span>
       <h3>Get Single Price</h3>
       <form id="testForm2" class="border">
-        <input type="text" name="stock" placeholder="goog" style="width: 100px" required='' minlength="4" maxlength="4">
-        <!-- <input type="checkbox" name="like" value=true> Like?<br> -->
-        <button type="submit">Get Price!</button>
+        <div class="md-form">
+          <input type='text' id='test-form-2-input' name='stock' class="form-control text-dark" required=''' minlength="4" maxlength="4">
+          <label class="text-dark" for='test-form-2-input'>Enter NASDAQ Symbol</label>
+        </div>
+        <button type="submit" class="btn btn-success">Get Price!</button>
       </form>
       <h3>Compare Stocks</h3>
       <form id="testForm" class="border">
-        <input type="text" name="stock" placeholder="goog" style="width: 100px" required='' minlength="4" maxlength="4">
-        <input type="text" name="stock" placeholder="msft" style="width: 100px" required='' minlength="4" maxlength="4">
-        <!-- <input type="checkbox" name="like" value=true> Like both?<br> -->
-        <button type="submit">Get Price!</button>
+        <div class="md-form">
+          <input type='text' id='test-form-1-input_1' name='stock' class="form-control text-dark" required=''' minlength="4" maxlength="4">
+          <label class="text-dark" for='test-form-1-input_1'>NASDAQ Symbol - Stock 1</label>
+        </div>
+        <div class="md-form">
+          <input type='text' id='test-form-1-input_2' name='stock' class="form-control text-dark" required=''' minlength="4" maxlength="4">
+          <label class="text-dark" for='test-form-1-input_2'>NASDAQ Symbol - Stock 2</label>
+        </div>
+        <button type="submit" class="btn btn-success">Get Price!</button>
       </form>
-      <span id="testFormResults"></span>
-      <code id='jsonResult'></code>
+      <!-- vid -->
+      <video class="fg-video-1" autoPlay muted loop>
+        <source
+          src="https://coding-video.s3.eu-west-2.amazonaws.com/stock-exchange.mp4"
+          type="video/mp4"
+        />
+        Your browser is not supported
+      </video>
     </div>
-    <hr style='margin: 50px; margin-top: 200px'>
-    <!-- Your web-app is https, so your scripts need to be too -->
-    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
-            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
-    <script>
+    <hr style='margin-top: 180px'>
+    <!-- JQuery -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <!-- Bootstrap tooltips -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+   <!-- Bootstrap core JavaScript -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+   <!-- MDB core JavaScript -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+   <script>
+      
       $(function() {
 
         var items = [];
@@ -64,7 +89,7 @@
               console.log(data)
 
               $.each(data, function(i, val) {
-              items.push('<p>Stock Data</p><li>' + val[0].stock + ' - ' + val[0].price + '</li><li>' + val[1].stock + ' - ' + val[1].price + '</li>');
+              items.push('<p class="result-title">Stock Data</p><p class="result-item">' + val[0].stock + ' - ' + val[0].price + '</p><p class="result-item">' + val[1].stock + ' - ' + val[1].price + '</p>');
               });
 
               console.log(items);
@@ -84,7 +109,7 @@
               console.log(data)
 
               $.each(data, function(i, val) {
-              items.push('<p>Stock Data</p><li>' + val.stock + ' - ' + val.price + '</li>');
+              items.push('<p class="result-title">Stock Data</p><p class="result-item">' + val.stock + ' - ' + val.price + '</p>');
               $('#testFormResults').html(items.join(''));
               })
             }
@@ -93,5 +118,6 @@
         });
       });
    </script>
+
   </body>
 </html>

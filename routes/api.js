@@ -35,7 +35,11 @@ module.exports = function (app) {
 
       // output response - convert responseObject to json
       let outputResponse = () => {
+        try {
         return res.json(responseObject)
+        } catch (err) {
+          console.log(err)
+        }
       }
 
       let findOrUpdateStock = (stockName, documentUpdate, nextStep) => {
@@ -81,11 +85,7 @@ module.exports = function (app) {
         xhr.onload = () => {
 
           let apiResponse = JSON.parse(xhr.responseText);
-         
-          console.log("HERE"+apiResponse['latestPrice']+"TYPOF"+typeof apiResponse['latestPrice']);
-
-
-
+        
           // if apiResponse is undefined the app crashes
           stockDocument['price'] = apiResponse['latestPrice'].toFixed(2);
           nextStep(stockDocument, outputResponse)
